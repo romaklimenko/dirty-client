@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Пользователи</h5>
+    <form [formGroup]="userForm" (ngSubmit)="submit()">
+      <p class="card-text">
+        Введите имя или имена пользователей через запятую
+        <span class="card-text" *ngIf="!apiService.anonymous">
+          (или&nbsp;почитайте&nbsp;<a [routerLink]="'/user/' + apiService.session?.user?.login">о&nbsp;себе</a>)</span>:
+      </p>
+      <input type="text" class="form-control mb-2" formControlName="username" autocomplete="on" placeholder="имя пользователя">
+      <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">YARRR!</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Сообщества</h5>
+
+    <form [formGroup]="domainForm" (ngSubmit)="submit()">
+      <div class="card-text">
+        Введите название сообщества:
+      </div>
+      <input type="text" class="form-control mb-2" formControlName="domain" autocomplete="on" placeholder="название сообщества">
+      <button type="submit" [disabled]="!domainForm.valid" class="btn btn-primary">YARRR!</button>
+    </form>
+
+    <br>
+
+    <div *ngIf="elections.size > 0" class="card-text">
+      Выборы идут или недавно прошли в следующих сообществах:
+    </div>
+
+    <ol *ngIf="elections.size > 0">
+      <li *ngFor="let domain of elections">
+        <a routerLink="/domain/{{ domain }}">{{ domain }}</a>
+      </li>
+    </ol>
+
+    <div *ngIf="domains !== undefined && domains.length > 0" class="card-text">
+      Изменения в количестве подписчиков сообществ:
+    </div>
+
+    <ol *ngIf="domains !== undefined && domains.length > 0">
+      <li *ngFor="let domain of domains">
+        <svg style="position:relative;top:1px;" width=14 height=14 viewBox="-10 -10 20 20">
+          <circle r="9" cy="-1" [attr.fill]="color(domain.subscribers_per_day)">
+            <title>{{ domain.subscribers_per_day }} подписчиков в день</title>
+          </circle>
+        </svg>&nbsp;
+        <a routerLink="/domain/{{ domain.prefix }}">{{ domain.prefix }}</a>
+        за <span title="{{ epochToDate(domain.epoch_from) }}">{{ domain.days_change }}</span>
+        <strong [ngStyle]="{ color: domain.readers_count_change >= 0 ? '#00C853' : '#FF5722' }">
+          {{ domain.readers_count_change >= 0 ? '+' : '' }}{{ domain.readers_count_change }}</strong>
+          &nbsp;&rarr;&nbsp;{{ domain.new_readers_count }}
+      </li>
+    </ol>
+  </div>
+</div>

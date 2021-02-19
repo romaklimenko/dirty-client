@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-8">
+    <h5>Как залогиниться на d3.ru</h5>
+
+    <p>Несмотря на мои усилия объяснить людям как работает этот сайт,
+      некоторые пользователи продолжают шокировать своим невежеством.
+      Я не собираюсь бегать за каждым, кто не в состоянии нажать на F12 в своём браузере
+      и посмотреть что и куда отправляется. Но один сценарий, всё-таки, разберу.
+    </p>
+
+    <p>Итак, пишет
+      пользователь, возможно, ни разу не открывавший этот сайт:</p>
+
+    <blockquote>Ромина страница отправляет на ромин сервер пароли и логины пользователей
+      дёрти и это полный пиздец и зашквар пользоваться ей.</blockquote>
+
+    <p>Давайте проверим, вот я ввожу свои <code>username</code> и <code>password</code>,
+      и логинюсь на d3.ru с этого сайта.
+      Первый запрос – <code>ОPTIONS https://d3.ru/api/auth/login/</code>.
+      <br>
+      Второй запрос, сам логин (здесь передается пароль) – <code>POST https://d3.ru/api/auth/login/</code>:
+    </p>
+    <img src="https://storage.googleapis.com/dirty-public/login.png" class="img-fluid">
+
+    <p>Это <em>единственное</em> место, где введенный вами пароль от d3.ru передается на... d3.ru.</p>
+
+    <p>Не верите? Проверьте сами или позовите кого-нибудь компетентного.</p>
+
+    <p>В ответ на <code>POST https://d3.ru/api/auth/login/</code> с вашими <code>username</code> и <code>password</code>,
+      d3.ru возвращает JSON, который сохраняется в <code>localStorage</code> с ключом <code>session</code>.
+      Там хранятся ваши <code>sid</code> и <code>uid</code>.
+    </p>
+
+    <p>А вот код, который отправляет запрос на сервер d3.ru:</p>
+
+    <img src="https://storage.googleapis.com/dirty-public/login2.png" class="img-fluid">
+
+    <br>
+    <br>
+    <p>Больше прочитать об этом можно здесь:
+      <a href="https://d3.ru/api/docs/#post__/auth/login/" target="_blank">https://d3.ru/api/docs/#post__/auth/login/</a>
+    </p>
+
+    <p>Пожалуйста, не верьте всему, что пишут в интернетах.
+      <em>Никогда</em> ваши пароль или сессия не передаются на мой сервер. Только на d3.ru.
+    </p>
+
+    <br>
+    <br>
+
+  </div>
+
+  <div class="col-md-4">
+    <app-blog-list></app-blog-list>
+    <hr>
+    <img src="https://storage.googleapis.com/dirty-public/facepalm.jpg" class="img-fluid">
+  </div>
+
+</div>

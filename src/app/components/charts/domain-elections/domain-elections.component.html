@@ -1,0 +1,28 @@
+<div [hidden]="votes?.length === 0" class="row">
+  <div class="col-md-12">
+    <div>Выборы в сообществе {{ prefix }}:</div>
+    <svg class="chart" #svgElementElections></svg>
+  </div>
+</div>
+
+<div [hidden]="votes?.length === 0" class="row">
+  <div class="col-md-10">
+    <small>
+      <sup>*</sup>обновлено:
+      {{ lastUpdate | date:'medium' }}, последний голос: {{ lastVote | date:'medium' }}
+    </small>
+    <br>
+    <span *ngFor="let legend of legends">
+      <svg style="position:relative;top:1px;" width=14 height=14 viewBox="-10 -10 20 20"><circle r="9" cy="-1" [attr.fill]="legend.color" /></svg>&nbsp;-&nbsp;<app-username [username]="legend.username" [outer]="true"></app-username>&nbsp;
+    </span>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+    <img *ngIf="votes?.length > 0" src="assets/images/elections.png" height="150px" style="position: relative; bottom: 0; right: 0px;" alt="Выборы">
+  </div>
+</div>

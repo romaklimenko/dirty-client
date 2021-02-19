@@ -1,0 +1,63 @@
+<div *ngIf="!apiService.anonymous && bannedSync" class="row">
+  <div class="col-md-8">
+    <img src="assets/images/fuck.jpg" alt="">
+    <br>
+    <br>
+    <p>Так случилось, что вас здесь забанили.<br>
+      Не расстраивайтесь, есть ещё много других интересных сайтов.
+    </p>
+  </div>
+</div>
+
+<div class="row" *ngIf="apiService.anonymous">
+  <div class="col-md-8">
+    <h1>Привет!</h1>
+    <p>
+      У нас тут своя атмосфера, поэтому вход только по логину d3.ru и с фейс-контролем.
+    </p>
+    <div>
+      Пользовательское соглашение простое:
+    </div>
+    <ul>
+      <li>Это – частный некоммерческий сайт для личного пользования и только для друзей.</li>
+      <li>Ваши пароль и сессия от d3.ru передаются <strong>только</strong> на d3.ru.</li>
+      <li>Как и большинство сайтов в интернете, этот сайт записывает логи посещений.</li>
+      <li>В любых других спорных ситуациях, следуйте <a href="https://d3.ru/wiki/%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF_%D0%B2%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener noreferrer">принципу валидации</a>.</li>
+      <li>Нажимая на кнопку "Представиться" вы соглашаетесь с этими правилами.</li>
+    </ul>
+    <p>Если вы согласны, то добро пожаловать!</p>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-8">
+    <div *ngFor="let error of errors" class="alert alert-danger" role="alert">
+      {{ errorCodeToMessage(error.description.code) }}
+    </div>
+    <form *ngIf="apiService.anonymous" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="username">Имя пользователя</label>
+          <input type="text" formControlName="username" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="password">Пароль</label>
+          <input type="password" formControlName="password" class="form-control" autocomplete="on">
+        </div>
+      </div>
+      <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Представиться</button>
+    </form>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+      <a routerLink="/welcome" class="btn btn-secondary btn-sm" style="width: 100px;">О сайте</a>&nbsp;
+      <a routerLink="/release-notes" class="btn btn-secondary btn-sm" style="width: 120px;">Release notes</a>&nbsp;
+      <br>
+    </div>
+  </div>
+</div>

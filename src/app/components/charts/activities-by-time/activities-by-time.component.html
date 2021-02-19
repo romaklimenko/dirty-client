@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-12">
+    <div>
+      Каждая точка на этом графике –
+      <span *ngIf="username.toLowerCase() === apiService.session?.user?.login?.toLowerCase()">
+        ваш, <app-username [username]="username" [outer]="true"></app-username>, пост или комментарий.
+      </span>
+      <span *ngIf="username.toLowerCase() !== apiService.session?.user?.login?.toLowerCase()">
+        пост или комментарий <app-username [username]="username" [outer]="true"></app-username>.
+      </span>
+      <strong style="color:#00C853;">Зеленая</strong> – положительный рейтинг,
+      <strong style="color:#FF5722;">красная</strong> – отрицательный,
+      <strong style="color:#757575;">серая</strong> – 0:
+    </div>
+    <svg class="chart" #svgElement></svg>
+  </div>
+</div>
+<br>

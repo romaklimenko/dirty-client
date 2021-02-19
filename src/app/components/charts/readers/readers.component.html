@@ -1,0 +1,19 @@
+<div [hidden]="readers?.length === 0" class="row">
+  <div class="col-md-12">
+    <div>Количество подписчиков в сообществе за всё время наблюдения
+      (<span style="color:#ff9900;">оранжевая</span> линия – месяц назад,
+      <span style="color:#dc3912;">красная</span> – неделя):</div>
+    <svg class="chart" #svgElementAllReaders></svg>
+  </div>
+</div>
+
+<br>
+
+<div [hidden]="readers?.length === 0" class="row">
+  <div class="col-md-12">
+    <div>Количество подписчиков за последний месяц:</div>
+    <svg class="chart" #svgElementLastReaders></svg>
+  </div>
+</div>
+
+<br>

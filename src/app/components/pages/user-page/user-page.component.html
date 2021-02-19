@@ -1,0 +1,121 @@
+<div *ngIf="!ready" class="row">
+  <app-hypnotoad></app-hypnotoad>
+</div>
+<div *ngIf="ready" class="row" style="margin-bottom: 15px;">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a [routerLink]="" class="nav-link" [ngClass]="currentTab === 'activity' ? 'active' : ''" (click)="selectTab('activity')">
+          Активность
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="" class="nav-link" [ngClass]="currentTab === 'karma' ? 'active' : ''" (click)="selectTab('karma')">
+          Карма
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="" class="nav-link" [ngClass]="currentTab === 'rating' ? 'active' : ''" (click)="selectTab('rating')">
+          Рейтинг
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="" class="nav-link" [ngClass]="currentTab === 'bans' ? 'active' : ''" (click)="selectTab('bans')">
+          Баны
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div [hidden]="currentTab !== 'activity' || !ready || allActivities.length === 0">
+  <app-activities-by-time *ngIf="ready && allActivities.length > 0"
+    [allActivities]="allActivities"
+    [username]="activities.user"
+    [width]="width()"></app-activities-by-time>
+
+  <app-activities-by-day *ngIf="ready && allActivities.length > 0"
+    [allActivities]="allActivities"
+    [username]="activities.user"
+    [width]="width()"></app-activities-by-day>
+
+  <app-sleeps *ngIf="ready && allActivities.length > 0"
+    [allActivities]="allActivities"
+    [username]="activities.user"
+    [width]="width()"></app-sleeps>
+
+</div>
+
+<div [hidden]="currentTab !== 'karma' || !ready || karma.length === 0">
+  <app-karma *ngIf="!!activities?.user && karma.length > 0"
+    [karma]="karma"
+    [username]="activities.user"
+    [width]="width()"></app-karma>
+</div>
+
+<div [hidden]="currentTab !== 'rating'">
+  <app-cumulative-rating *ngIf="ready && allActivities.length > 0"
+    [allActivities]="allActivities"
+    [username]="activities.user"
+    [width]="width()"></app-cumulative-rating>
+  <br>
+  <app-top-activities-list *ngIf="ready && allActivities.length > 0"
+    [activities]="activities"></app-top-activities-list>
+  <br>
+  <app-lovers-and-haters *ngIf="ready && voters && allActivities.length > 0"
+    [voters]="voters"
+    [username]="activities.user"
+    [width]="width()"></app-lovers-and-haters>
+  <br>
+  <app-domains *ngIf="ready && allActivities.length > 0"
+    [allActivities]="allActivities"
+    [width]="width()"></app-domains>
+</div>
+
+<div [hidden]="currentTab !== 'bans'">
+  <ul *ngIf="bans !== null" style="list-style-image: url('https://d3.ru/static/i/lopata.gif')">
+    <li *ngFor="let ban of bans.bans">
+      Забанен {{ epochToDate(ban.created) }}
+      <span *ngIf="ban.expires === null">
+        навсегда
+      </span>
+
+      <span *ngIf="ban.expires !== null">
+        до {{ epochToDate(ban.expires) }}
+      </span>
+
+      <em *ngIf="ban.domain === null">на всех сообществах</em>
+
+      <span *ngIf="ban.domain !== null">
+        в сообществе <a [href]="ban.domain.prefix | domain" target="_blank">{{ ban.domain.prefix }}</a>
+      </span>
+      модератором <app-username [username]="ban.moderator.login" [outer]="true"></app-username>
+
+      <span *ngIf="ban.reason !== ''">
+        с пометкой: <i>«{{ ban.reason }}»</i>.
+      </span>
+
+      <span *ngIf="ban.reason == ''">
+        без пометки.
+      </span>
+    </li>
+  </ul>
+</div>
+
+<br>
+
+<div class="row">
+  <div #widthStandard class="col-md-12"></div>
+</div>
+
+<div class="row" *ngIf="currentTab !== 'bans'">
+  <div class="col-md-10">
+    <p style="font-size: larger;" class="text-right" *ngIf="ready && username.toLowerCase() === apiService.session?.user?.login.toLowerCase()">
+      Ну вы и д'Артаньян, {{ username }}!
+    </p>
+  </div>
+  <div class="col-md-2">
+    <img *ngIf="ready && username.toLowerCase() === apiService.session?.user?.login.toLowerCase()" src="assets/images/dart.png" height="150px" style="position: relative; bottom: 0px; right: -20px;" alt="Д'Артаньян">
+    <img *ngIf="ready && username.toLowerCase() !== apiService.session?.user?.login.toLowerCase()" src="assets/images/aramis.png" height="150px" style="position: relative; bottom: 0px; right: -15px;" alt="Арамис">
+  </div>
+</div>

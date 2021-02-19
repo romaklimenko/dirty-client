@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-12">
+    <span *ngIf="username.toLowerCase() !== apiService.session?.user?.login?.toLowerCase()">
+      А здесь можно увидеть когда пользователь недосыпал.
+    </span>
+    <span *ngIf="username.toLowerCase() === apiService.session?.user?.login?.toLowerCase()">
+      А здесь можно увидеть когда вы недосыпали.
+    </span>
+    <strong style="color:#FF5722">Красные</strong> линии – меньше шести часов в сутки, <strong style="color:#FF9800;">оранжевые</strong> – меньше восьми:
+    <svg class="chart" #svgElement></svg>
+  </div>
+</div>

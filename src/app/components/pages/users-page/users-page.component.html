@@ -1,0 +1,34 @@
+<div *ngIf="!ready" class="row">
+  <div class="col-md-12">
+    <app-hypnotoad></app-hypnotoad>
+  </div>
+</div>
+<div *ngIf="ready" class="row">
+  <div class="col-md-12">
+    <div *ngIf="ready && legends?.length > 0">Сравнение активностей пользователей:</div>
+    <svg #svgElement></svg>&nbsp;
+  </div>
+</div>
+<div *ngIf="ready && legends?.length > 0" class="row">
+  <div class="col-md-12">
+    <span *ngFor="let legend of legends">
+      <svg style="position:relative;top:1px;" width=14 height=14 viewBox="-10 -10 20 20"><circle r="9" cy="-1" [attr.fill]="legend.color" /></svg>&nbsp;-&nbsp;<app-username [username]="legend.username" [outer]="true"></app-username>&nbsp;
+    </span>
+  </div>
+  <div class="col-md-12">
+    <br>
+    <div>Голоса в кармы других пользователей:</div>
+    <ul class="list-unstyled">
+      <li *ngFor="let k of karma; let i = index;">
+        <br *ngIf="i !== 0 && karma[i - 1].changed - k.changed > 60 * 60">
+        {{ epochToDateTime(k.changed) }}
+        <app-username [username]="k.from" [renderSockpuppets]="false"></app-username>
+        &rarr; <app-username [username]="k.user.login" [renderSockpuppets]="false"></app-username>&nbsp;
+        <strong>
+          <span *ngIf="k.vote >= 0" style="color:#00C853">+{{ k.vote }}</span>
+          <span *ngIf="k.vote < 0" style="color:#FF5722">{{ k.vote }}</span>
+        </strong>
+      </li>
+    </ul>
+  </div>
+</div>

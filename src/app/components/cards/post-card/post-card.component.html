@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Посты</h5>
+    <form [formGroup]="postForm" (ngSubmit)="submit()">
+      <input type="text" class="form-control mb-2" formControlName="post" autocomplete="on" placeholder="адрес поста">
+      <button type="submit" [disabled]="!postForm.valid" class="btn btn-primary">YARRR!</button>
+    </form>
+
+    <br *ngIf="posts.length > 0">
+    <div *ngIf="posts.length > 0">Ваши последние посты:</div>
+    <ol *ngIf="posts.length > 0">
+      <li *ngFor="let post of posts">
+        <a [routerLink]="'/post/' + post.id">{{ post.title }}</a>
+      </li>
+    </ol>
+  </div>
+</div>

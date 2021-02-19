@@ -1,0 +1,38 @@
+<div *ngIf="apiService.anonymous" class="row">
+  <div class="col-md-12">
+    <p>К сожалению, если не <a routerLink="/login">представиться</a>, то ничего не будет.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div *ngIf="!ready" class="col-md-10">
+    <app-hypnotoad></app-hypnotoad>
+  </div>
+  <div *ngIf="ready" class="col-md-12">
+    <div *ngIf="error !== ''" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+    <h5 *ngIf="!apiService.anonymous && notes?.length > 0">Вот что о вас пишут:</h5>
+    <small>*даты заметок показывают, когда пользователь впервые оставил заметку в вашем профиле, но не показывают,
+      когда пользователь правил заметку.</small>
+    <br>
+    <br>
+    <ol *ngIf="!apiService.anonymous && notes?.length > 0" reversed>
+      <li *ngFor="let note of notes">
+        <i><span class="gray">«</span>{{ note.body }}<span class="gray">», &mdash;</span></i>&nbsp;
+        <span *ngIf="!note.author" class="gray">написал некто {{ epochToString(note.created) }}.</span>
+        <span *ngIf="note.author" class="gray">
+          написал
+          <app-username [username]="note.author" [outer]="true"></app-username> {{ epochToString(note.created) }}<span *ngIf="!note.vote">.</span>
+          <ng-container *ngIf="note.vote">
+            и поставил в карму
+            <span [ngClass]="(note.vote > 0) ? 'positive' : 'negative'">
+              {{ note.vote }}</span>.
+          </ng-container>
+        </span>
+      </li>
+    </ol>
+    <img src="assets/images/dvornik.png" class="img-footer"  height="275px" style="bottom: 5px; right: 5px;" alt="Дворник">
+  </div>
+</div>
+

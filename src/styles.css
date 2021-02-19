@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;700&family=Ubuntu:wght@400;700&display=swap");
+body {
+  font-family: "Ubuntu";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header {
+  color: #333;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.17em;
+}
+h4 {
+  font-size: 1em;
+}
+h5 {
+  font-size: 0.9em;
+}
+h6 {
+  font-size: 0.8em;
+}
+header {
+  padding-top: 15px;
+  font-size: 120%;
+}
+.hl-black {
+  font-family: Ubuntu;
+  background-color: #007bff;
+  color: white !important;
+  padding: 0 5px 0 5px;
+}
+dd {
+  margin-bottom: 0;
+}
+blockquote {
+  border-left: 2px solid #000;
+  color: #777;
+  padding: 0 1em 0 1em;
+  margin-bottom: 1em;
+  font-style: italic;
+}
+em {
+  padding: 1px;
+  font-style: normal;
+  background-color: #ffd600;
+}
+.badge a {
+  color: white;
+  font-family: Ubuntu;
+}
+pre {
+  font-size: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  body,
+  .card,
+  .table,
+  .form-control,
+  .form-control:focus,
+  .nav-link.active {
+    background-color: #0d1117 !important;
+    color: #c9d1d9;
+  }
+  body a,
+  .card a,
+  .table a,
+  .form-control a,
+  .form-control:focus a,
+  .nav-link.active a {
+    color: #4e94ce;
+  }
+  body .hl-black,
+  .card .hl-black,
+  .table .hl-black,
+  .form-control .hl-black,
+  .form-control:focus .hl-black,
+  .nav-link.active .hl-black {
+    color: #fff !important;
+  }
+  em {
+    color: #0d1117;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #c9d1d9;
+  }
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+.positive {
+  color: #00C853;
+}
+
+.negative {
+  color: #FF5722;
+}
+
+.chart {
+  border: 1px solid #dee2e6
+}
+
+body {
+  font-size: 14px;
+  font-family: Ubuntu;
+}
+
+@media (min-width: 1200px) {
+  .img-footer {
+    position: fixed;
+  }
+}
+
+kbd {
+  background-color: #FF6F00;
+}
+
+dt {
+  margin-top: 10px;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+.btn-primary, .btn-secondary {
+  color: white !important;
+}
+

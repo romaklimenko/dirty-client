@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12">
+    <strong>Самые заплюсованные посты:</strong>
+    <br>
+    <div *ngFor="let post of topUpvotedPosts">
+      Пост "<a [attr.href]="'https://d3.ru/' + post.id" target="_blank">{{ posts[post.id].title === '' ? post.id : posts[post.id].title }}</a>" от {{ epochToDateString(post.created) }}
+      на <strong>{{ post.domain === '' ? 'd3' : post.domain }}</strong>
+      набрал {{ post.rating }}
+    </div>
+    <br>
+    <strong>Самые заминусованные посты:</strong>
+    <br>
+    <div *ngFor="let post of topDownvotedPosts">
+      Пост "<a [attr.href]="'https://d3.ru/' + post.id" target="_blank">{{ posts[post.id].title === '' ? post.id : posts[post.id].title }}</a>" от {{ epochToDateString(post.created) }}
+      на <strong>{{ post.domain === '' ? 'd3' : post.domain }}</strong>
+      набрал {{ post.rating }}
+    </div>
+    <br>
+    <strong>Самые заплюсованные комментарии:</strong>
+    <br>
+    <div *ngFor="let comment of topUpvotedComments">
+      Комментарий от <strong>{{ epochToDateString(comment.created) }}</strong> в посте "<a [attr.href]="'https://d3.ru/' + comment.post_id + '#' + comment.id" target="_blank">{{ posts[comment.post_id].title === '' ? comment.post_id : posts[comment.post_id].title }}</a>"
+      на <strong>{{ comment.domain === '' ? 'd3' : comment.domain }}</strong>
+      набрал {{ comment.rating }}
+    </div>
+    <br>
+    <strong>Самые заминусованные комментарии:</strong>
+    <br>
+    <div *ngFor="let comment of topDownvotedComments">
+      Комментарий от <strong>{{ epochToDateString(comment.created) }}</strong> в посте "<a [attr.href]="'https://d3.ru/' + comment.post_id + '#' + comment.id" target="_blank">{{ posts[comment.post_id].title === '' ? comment.post_id : posts[comment.post_id].title }}</a>"
+      на <strong>{{ comment.domain === '' ? 'd3' : comment.domain }}</strong>
+      набрал {{ comment.rating }}
+    </div>
+  </div>
+</div>

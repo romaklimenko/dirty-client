@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-md-12">
+    <div *ngIf="username.toLowerCase() === apiService.session?.user?.login?.toLowerCase()">
+      Так менялась ваша карма:
+    </div>
+    <div *ngIf="username.toLowerCase() !== apiService.session?.user?.login?.toLowerCase()">
+      Так менялась карма <app-username [username]="username" [outer]="true"></app-username>:
+    </div>
+    <svg class="chart" #svgElement></svg>
+
+    <br>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h6>
+      Голоса в карму <app-username [username]="username" [outer]="true"></app-username>&nbsp;
+      <strong>(<span style="color:#00C853">+{{ sumInUp }}</span>&nbsp;+
+        <span style="color:#FF5722">{{ sumInDown }}</span>&nbsp;=
+        <span *ngIf="sumIn >= 0" style="color:#00C853">+{{ sumIn }}</span>
+        <span *ngIf="sumIn < 0" style="color:#FF5722">{{ sumIn }}</span>):
+      </strong>
+    </h6>
+    <br>
+  </div>
+  <div class="col-md-6">
+    <h6>
+      Голоса <app-username [username]="username" [outer]="true"></app-username> в кармы других&nbsp;
+      <strong>(<span style="color:#00C853">+{{ sumOutUp }}</span>&nbsp;+
+        <span style="color:#FF5722">{{ sumOutDown }}</span>&nbsp;=
+        <span *ngIf="sumOut >= 0" style="color:#00C853">+{{ sumOut }}</span>
+        <span *ngIf="sumOut < 0" style="color:#FF5722">{{ sumOut }}</span>):
+      </strong>
+    </h6>
+    <br>
+  </div>
+</div>
+
+<div class="row" *ngFor="let l of log">
+  <div *ngIf="l.date.upIn !== 0 || l.date.downIn !== 0" class="col-12 col-sm-12 col-md-6">
+    <a [href]="l.href" target="_blank">{{ l.key }}</a>&nbsp;
+    <strong>(<span style="color:#00C853">+{{ l.date.upIn }}</span>&nbsp;+
+      <span style="color:#FF5722">{{ l.date.downIn }}</span>&nbsp;=
+      <span *ngIf="l.deltaIn >= 0" style="color:#00C853">+{{ l.deltaIn }}</span>
+      <span *ngIf="l.deltaIn < 0" style="color:#FF5722">{{ l.deltaIn }}</span>):
+    </strong>
+  </div>
+
+  <div *ngIf="l.date.upIn === 0 && l.date.downIn === 0" class="col-12 col-sm-12 col-md-6">
+    &nbsp;
+  </div>
+  <div *ngIf="l.date.upOut !== 0 || l.date.downOut !== 0" style="color:#919191 !important;" class="col-12 col-sm-12 col-md-6">
+    <a [href]="l.href" target="_blank">{{ l.key }}</a>&nbsp;
+    <strong>(<span style="color:#A5D6A7">+{{ l.date.upOut }}</span>&nbsp;+
+      <span style="color:#FFAB91">{{ l.date.downOut }}</span>&nbsp;=
+      <span *ngIf="l.deltaOut >= 0" style="color:#A5D6A7">+{{ l.deltaOut }}</span>
+      <span *ngIf="l.deltaOut < 0" style="color:#FFAB91">{{ l.deltaOut }}</span>):
+    </strong>
+  </div>
+  <div *ngIf="l.date.upOut === 0 && l.date.downOut === 0" class="col-12 col-sm-12 col-md-6">
+    &nbsp;
+  </div>
+
+  <ng-container *ngFor="let r of l.date.votes">
+    <!-- in -->
+    <div class="col-12 col-sm-12 col-md-6" *ngIf="!r.from">
+      {{ r.time }}
+      <span [ngStyle]="{ color: r.vote > 0 ? '#00C853' : '#FF5722' }">{{ r.vote > 0 ? '+' + r.vote : r.vote }}</span>
+      от <app-username [username]="r.user.login" [outer]="true"></app-username><span *ngIf="r.note">, написавшего:</span>
+      <i *ngIf="r.note"> «{{ r.note.body }}»</i>
+    </div>
+    <div class="col-md-6 d-none d-md-block" *ngIf="!r.from">
+      &nbsp;
+    </div>
+
+    <!-- out -->
+    <div class="col-12 col-sm-12 col-md-6 d-none d-md-block" *ngIf="r.from">
+      &nbsp;
+    </div>
+    <div [class]="r.deleted ? 'deleted col-md-6' : 'col-md-6'" style="color:#919191 !important;" *ngIf="r.from">
+      {{ r.time }}
+      <span [ngStyle]="{ color: r.vote > 0 ? '#A5D6A7' : '#FFAB91' }">{{ r.vote > 0 ? '+' + r.vote : r.vote }}</span>&nbsp;
+      <app-username [username]="r.user.login" [outer]="true"></app-username><span *ngIf="r.note">, написавшему:</span>
+      <i *ngIf="r.note">
+        «{{ r.note.body }}»
+      </i>
+    </div>
+  </ng-container>
+  <div class="col-12">
+    <hr>
+  </div>
+</div>

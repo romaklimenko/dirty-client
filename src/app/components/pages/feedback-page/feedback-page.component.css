@@ -1,0 +1,5 @@
+img {
+  margin-bottom: 20px;
+  max-width: 100%;
+  filter: drop-shadow(3px 3px 5px lightgray);
+}

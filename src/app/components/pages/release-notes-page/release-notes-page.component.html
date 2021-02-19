@@ -1,0 +1,192 @@
+<div class="row">
+  <div class="col-md-8">
+    <h5 class="card-title">Release Notes</h5>
+
+    <dl>
+      <dt>2021.01.06</dt>
+      <dd>
+        Имена плюсующих и минусующих на графиках теперь кликабельны.
+        (замечание от <app-username [username]="'vorchuchelo'" [outer]="true"></app-username>)
+      </dd>
+
+      <dt>2020.12.19</dt>
+      <dd>
+        Фейс-контроль и вход только по пропускам d3.ru.
+      </dd>
+      <dd>
+        Логгирование HTTP-запросов и ответов в консоли.
+      </dd>
+
+      <dt>2020.12.14</dt>
+      <dd>
+        Автобан! В рамках помощи в выборе направления неопределившимися личностям.
+      </dd>
+
+      <dt>2020.09.29</dt>
+      <dd>
+        На <a routerLink="/users/mig29,cebepo_boctok,ha_cebepe_mopo3,salazar">странице сравнения пользователей</a>
+        можно сравнивать их голоса в кармы другим пользователям.
+      </dd>
+      <dd>
+        <a routerLink="/post/2046243">Рейтинг поста</a>
+        теперь можно видеть и без учёта весов голосов пользователей.
+      </dd>
+
+      <dt>2020.08.31</dt>
+      <dd>
+        Теперь можно видеть не только голоса в карму пользователя,
+        но и голоса пользователя в кармы других (кэш!).
+      </dd>
+
+      <dt>2020.08.26</dt>
+      <dd>
+        В отчетах о выборах, подсказки на кружочках голосов
+        теперь показывают не только кто голосовал, но и за кого.
+        Это должно помочь избежать недоразумений, если кандидатов больше, чем цветов на графике
+        (багрепорт: <app-username [username]="'an_tosha'" [outer]="true"></app-username>).
+      </dd>
+
+      <dt>2020.08.19</dt>
+      <dd>Хроника выдачи <a href="https://announcements.d3.ru/indulgentsiia-1837265/" target="_blank">индульгенций</a>.
+      </dd>
+      <dd>Даты заметок.</dd>
+
+      <dt>2020.08.15</dt>
+      <dd>В <a routerLink="/top">дайджесте постов на главной</a>, корректно отображаются посты, опубликованные прямо на главной
+        (багрепорт: <app-username [username]="'ComboRam'" [outer]="true"></app-username>).
+      </dd>
+      <dd>На странице <a routerLink="/welcome">правил</a>, не показывается лишние ссылки, пока пользователь не согласится с правилами
+        (багрепорт: <app-username [username]="'monnoir'" [outer]="true"></app-username>).
+      </dd>
+
+      <dt>2020.08.07</dt>
+      <dd>В <a routerLink="/post/2020230">отчете о посте</a>, теперь отображается время создания и время последнего редактирования поста
+        <br>(на идею натолкнул <app-username [username]="'yegorka'" [outer]="true"></app-username>).
+      </dd>
+
+      <dt>2020.07.27</dt>
+      <dd>Топы плюсующих и минусующих пользователей в отчетах сообществ. И табы.</dd>
+
+      <dt>2020.07.21</dt>
+      <dd>Для залогиненных пользователей теперь отображаются их&nbsp;последние десять постов
+        с&nbsp;возможностью перейти к&nbsp;отчету по&nbsp;постам.</dd>
+
+      <dt>2020.07.19</dt>
+      <dd>Теперь в отчетах о постах видно когда пост был на главной.</dd>
+
+      <dt>2020.07.09</dt>
+      <dd>Баг имени @Mutter:
+        не отображался список банов, поскольку
+        <a href="https://d3.ru/user/Mutter/bans/" target="_blank">пользователь</a>
+        был забанен не на конкретном сообществе, а на всем d3.ru.</dd>
+
+      <dt>2020.07.01</dt>
+      <dd>Слава <app-username [username]="'ckkpss'" [outer]="true"></app-username>
+        за <a routerLink="/gold">золото</a> для Ботана! ❤️
+      </dd>
+
+      <dt>2020.06.24</dt>
+      <dd>
+        <a routerLink="/socks">Виртуалы</a>.
+      </dd>
+
+      <dt>2020.06.21</dt>
+      <dd>
+        Вкладка <a routerLink="/user/bitl">банов пользователя</a>.
+          Теперь можно видеть дату бана с точностью до секунды.<br>
+          (пожелание пользователя <a href="https://d3.ru/user/elicaster/" target="_blank">@elicaster</a>)
+      </dd>
+
+      <dt>2020.06.19</dt>
+      <dd>
+        <ul class="list-unstyled">
+          <li>График <a routerLink="/domain/concrete">лучших авторов</a> сообщества.</li>
+          <li>Дополнительная информация о сообществах: <a routerLink="/domain/citatio">выводится ли в общие ленты</a>,
+            доступно ли всем или <a routerLink="/domain/shnyaga">только по списку</a>.</li>
+        </ul>
+      </dd>
+
+      <dt>2020.06.18</dt>
+      <dd>
+        <ul class="list-unstyled">
+          <li><a routerLink="/domain/foto">Графики подписчиков</a>.</li>
+          <li>Мониторинг сообществ с изменениями в количестве подписчиков (см. на <a routerLink="/">главной</a>).</li>
+        </ul>
+      </dd>
+
+      <dt>2020.06.11</dt>
+      <dd>
+        <ul class="list-unstyled">
+          <li>Графики постов теперь <a routerLink="/post/1912904">более наглядные</a> и со списком голосов.</li>
+          <li>Исправлен баг, когда хоткеи не давали ввести логин и пароль
+            (багрепорт: <a href="https://d3.ru/user/monnoir/" target="_blank">@monnoir</a>).</li>
+        </ul>
+      </dd>
+
+      <dt>2020.06.06</dt>
+      <dd>
+        <ul class="list-unstyled">
+          <li><a routerLink="/post/1984192">Графики постов</a>.</li>
+          <li>Горячие клавиши.</li>
+        </ul>
+      </dd>
+
+      <dt>2020.05.12</dt>
+      <dd>
+        Исправлен баг, приводивший к переполнению кэша <code>localStorage</code>.
+      </dd>
+
+      <dt>2020.04.29</dt>
+      <dd>
+        Сортировка <a routerLink="/top">постов на главной</a>.
+      </dd>
+
+      <dt>2020.04.18</dt>
+      <dd>
+        <a routerLink="/top">Посты на главной</a> за сутки.
+      </dd>
+
+      <dt>2020.03.27</dt>
+      <dd>
+        Эта страница.
+      </dd>
+
+      <dt>2020.03.09</dt>
+      <dd>
+        График поклонников и хейтеров – кто поставил больше всего плюсов и минусов последним активностям пользователя.
+      </dd>
+
+      <dt>2020.03.08</dt>
+      <dd>
+        <span class="card-text" *ngIf="!apiService.anonymous">
+          <a [routerLink]="'/user/' + apiService.session?.user?.login">Отчеты о пользователе</a>:
+          топовые посты и комментарии, карма, графики сна.</span>
+        <span class="card-text" *ngIf="apiService.anonymous">
+          <a routerLink="/user/jovan">Отчеты о пользователе</a>:
+          топовые посты и комментарии, карма, графики сна.</span>
+      </dd>
+
+      <dt>2020.03.02</dt>
+      <dd>
+        <ul class="list-unstyled">
+          <li><a routerLink="/domain/leprosorium">Выборы</a>.</li>
+          <li><a routerLink="/users/bitl,unlaba">Сравнение пользователей</a>.</li>
+        </ul>
+      </dd>
+
+      <dt>2020.02.22</dt>
+      <dd>
+        <ul class="list-unstyled">
+          <li>Баг имени @warenik: голоса удаленных пользователей иногда остаются в карме.</li>
+          <li><a routerLink="/notes">Заметки</a>.</li>
+        </ul>
+      </dd>
+
+      <dt>2020.01.29</dt>
+      <dd>
+        <code>git init ; git add . ; git commit -m Initial commit ;</code>
+      </dd>
+    </dl>
+
+  </div>
+</div>

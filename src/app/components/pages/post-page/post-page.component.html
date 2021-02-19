@@ -1,0 +1,84 @@
+<div *ngIf="!ready" class="row">
+  <app-hypnotoad></app-hypnotoad>
+</div>
+
+
+<div *ngIf="ready && post" class="row">
+  <div class="col-md-12">
+    <h5>
+      Пост "<a [attr.href]="'https://d3.ru/' + post['id']" target="_blank">{{ post['title'] === '' ? post['id'] : post['title'] }}</a>"
+    </h5>
+    <ul class="list-unstyled">
+      <li>
+        Опубликован пользователем <a [attr.href]="'https://d3.ru/user/' + post['user']['login']" target="_blank">{{ post['user']['login'] }}</a>
+        в <a [attr.href]="'https://' + post['domain']['prefix'] + '.d3.ru/'" target="_blank">{{ post['domain']['prefix'] }}</a>
+      </li>
+      <li>Рейтинг: {{ post['rating'] }}</li>
+      <li *ngIf="post['created'] !== post['changed']">
+        Опубликован: {{ epochToString(post['created']) }}, последняя редакция: {{ epochToString(post['changed']) }}
+      </li>
+      <li *ngIf="post['created'] === post['changed']">
+        Опубликован: {{ epochToString(post['created']) }}. Не редактировался.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="ready && votes.length > 0 && post" class="row">
+  <div class="col-md-12">
+    <div>Голоса за пост. Размер каждого кружка соответствует весу голоса.
+      Розовые кружки показывают когда пост был виден на главной d3.ru.
+      По вертикальной оси – рейтинг поста, а по горизонтальной – время добавления голоса.<br>
+      Серая линия – рейтинг поста без учёта веса голоса:
+
+    </div>
+    <app-post-votes
+      [votes]="votes"
+      [post]="post"
+      [width]="width()"></app-post-votes>
+
+    <br>
+  </div>
+</div>
+
+<div *ngIf="ready && firstVotes.length > 0" class="row">
+  <div class="col-md-12">
+    <div>Обычно, большинство голосов отдаются в первые сутки с момента опубликования поста:</div>
+    <app-post-votes
+      [votes]="firstVotes"
+      [post]="post"
+      [width]="width()"></app-post-votes>
+  </div>
+</div>
+
+<div *ngIf="ready && votes.length > 0" class="row">
+  <div class="col-md-12">
+    <br>
+    <div>Голоса за пост по времени голоса:</div>
+    <div>
+      <table class="table-sm table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Время</th>
+            <th scope="col">Голос</th>
+            <th scope="col">Пользователь</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of votes">
+            <td>{{ v.datetime.toLocaleDateString() }} {{ v.datetime.toLocaleTimeString() }}</td>
+            <td class="text-right">{{ v.vote }}</td>
+            <td>
+              <app-username [username]="v.user.login" [outer]="true"></app-username>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div #widthStandard class="col-md-12"></div>
+</div>

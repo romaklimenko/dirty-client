@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-12">
+    Количество активностей по дням. <strong>Черные</strong> – будни, <strong style="color:red;">красные</strong> – суббота и воскресенье,
+    а извилистая линия – скользящая средняя за 30 дней:
+    <svg class="chart" #svgElement></svg>
+    <br>
+    <br>
+    Среднее количество записей за последние {{ windowSize }} дней – <strong>{{ windowMean }}</strong> в день.
+    <br>
+    <br>
+    <div *ngIf="username.toLowerCase() === apiService.session?.user?.login?.toLowerCase()">
+      Воспользовавшись поиском, можно посмотреть что вы писали в свои самые активные дни:
+    </div>
+    <div *ngIf="username.toLowerCase() !== apiService.session?.user?.login?.toLowerCase()">
+      Воспользовавшись поиском, можно посмотреть что писал <app-username [username]="username" [outer]="true"></app-username> в свои самые активные дни:
+    </div>
+    <ul class="list-unstyled">
+      <li *ngFor="let top of topRecords">
+        <strong>{{ top.date }}</strong>
+        было написано <strong>{{ top.count }} </strong>
+        <a [href]="top.link" target="_blank">записей</a>
+      </li>
+    </ul>
+  </div>
+</div>

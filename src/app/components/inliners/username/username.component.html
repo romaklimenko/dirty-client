@@ -1,0 +1,7 @@
+<a *ngIf="!outer" [routerLink]="'/user/' + username">{{ username }}</a>
+<a *ngIf="outer" [href]="'https://d3.ru/user/' + username" target="_blank">{{ username }}</a>
+<i *ngIf="sockpuppets !== null && renderSockpuppets">&nbsp;(виртуал
+  <span *ngFor="let sockpuppet of sockpuppets; let last = last">
+    <span *ngIf="!last">{{ sockpuppet }}, </span>
+    <span *ngIf="last">{{ sockpuppet }}</span>
+  </span>)</i>

@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+    <span *ngIf="domain !== null">
+      Владелец <app-username [username]="domain?.owner?.login" [outer]="true"></app-username>.
+    </span>
+    <span *ngIf="domain?.is_excluded_from_feed">
+      Не выводится в общие ленты.
+    </span>
+    <span *ngIf="!domain?.is_excluded_from_feed">
+      Выводится в общие ленты.
+    </span>
+    <span *ngIf="domain !== null && !domain.is_readable_for_everyone">
+      Сообщество доступно только избранным пользователям.
+    </span>
+    <br>
+    <br>
+    <div *ngIf="domain?.domain_leaders?.length > 0">Лучшие авторы {{ domain.prefix }}:</div>
+    <svg [style]="domain === null || domain.domain_leaders?.length === 0 ? 'display: none;' : 'display: block;'" class="chart" #svgElementLeaders></svg>
+  </div>
+</div>

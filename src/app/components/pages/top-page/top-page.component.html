@@ -1,0 +1,64 @@
+<div class="row">
+
+  <div *ngIf="!ready" class="col-md-12">
+    <app-hypnotoad></app-hypnotoad>
+  </div>
+  <div *ngIf="ready" class="col-md-12">
+    <h5>Главная сайта <a href="https://d3.ru/" target="_blank">d3.ru</a> за последние сутки</h5>
+    <h6>Посты:
+    </h6>
+    <p>
+      Сортировать по:
+      <a [style]="sorting !== 'time' ? null : 'font-size: 1.2em;'" [attr.href]="sorting === 'time' ? null : 'javascript:void(0)'" (click)="changeSorting('time')">времени на главной</a>,
+      <a [style]="sorting !== 'comments' ? null : 'font-size: 1.2em;'" [attr.href]="sorting === 'comments' ? null : 'javascript:void(0)'" (click)="changeSorting('comments')">комментариям</a>,
+      <a [style]="sorting !== 'rating' ? null : 'font-size: 1.2em;'" [attr.href]="sorting === 'rating' ? null : 'javascript:void(0)'" (click)="changeSorting('rating')">рейтингу</a>,
+      <a [style]="sorting !== 'views' ? null : 'font-size: 1.2em;'" [attr.href]="sorting === 'views' ? null : 'javascript:void(0)'" (click)="changeSorting('views')">просмотрам</a>.
+    </p>
+    <ol>
+      <li *ngFor="let post of top">
+        «<a [attr.href]="'https://d3.ru/' + post._id" target="_blank">{{ post.title === '' ? post._id : post.title }}</a>»<sup>см. <a [routerLink]="'/post/' + post._id">отчёт</a></sup> <span *ngIf="post.golden"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path fill="#E5BD57" d="M14.974,8.913C14.908,8.7,14.632,8.51,14.421,8.479l-2.625-0.29l-1.294-2.862C10.408,5.127,10.214,5,10,5 C9.787,5,9.592,5.127,9.497,5.326L8.229,8.188l-2.65,0.29C5.367,8.51,5.09,8.7,5.026,8.913C4.962,9.126,5.016,9.356,5.169,9.516 l2.094,1.731l-0.44,3.028c-0.036,0.222,0.052,0.446,0.224,0.58c0.1,0.076,0.217,0.113,0.331,0.113c0.09,0,0.181-0.023,0.264-0.068 l2.386-1.784l2.334,1.815C12.443,14.978,12.538,15,12.625,15c0.116,0,0.235-0.038,0.331-0.113c0.173-0.134,0.261-0.357,0.221-0.562 l-0.479-3.124l2.132-1.686C14.982,9.356,15.037,9.126,14.974,8.913z"></path> </svg>
+        </span>
+        на <a *ngIf="post.domain !== ''" [attr.href]="'https://' + post.domain + '.d3.ru/'" target="_blank">{{ post.domain }}</a>
+        <a *ngIf="post.domain === ''" [attr.href]="'https://d3.ru/'" target="_blank">главной</a>
+        от <a [attr.href]="'https://d3.ru/user/' + post.user" target="_blank">{{ post.user }}</a>,
+        был на главной
+        <span [innerHTML]="formatMinutes(post.minutes)"></span>
+        <span *ngIf="post.rating" style="white-space:nowrap;">
+          <svg style="position:relative;top:-1px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 20 20">
+            <path fill="#000000" d="M9.146 0.646l-6 6c-0.195 0.195-0.195 0.512 0 0.707s0.512 0.195 0.707 0l5.146-5.146v16.293c0 0.276 0.224 0.5 0.5 0.5s0.5-0.224 0.5-0.5v-16.293l5.146 5.146c0.195 0.195 0.512 0.195 0.707 0 0.098-0.098 0.146-0.226 0.146-0.354s-0.049-0.256-0.146-0.354l-6-6c-0.195-0.195-0.512-0.195-0.707 0z"></path>
+            <title>Рейтинг поста</title>
+          </svg>{{ post.rating }}
+        </span>&nbsp;
+        <span style="white-space:nowrap;">
+          <svg style="position:relative;top:-1px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 20 20">
+            <path fill="#000000" d="M0.5 19c-0.225 0-0.422-0.15-0.482-0.367s0.032-0.447 0.225-0.562c1.691-1.014 2.392-2.489 2.641-3.179-1.838-1.407-2.884-3.354-2.884-5.392 0-1.029 0.258-2.026 0.768-2.964 0.486-0.894 1.18-1.695 2.061-2.381 1.787-1.39 4.156-2.156 6.671-2.156s4.884 0.766 6.671 2.156c0.881 0.685 1.575 1.486 2.061 2.381 0.51 0.937 0.768 1.934 0.768 2.964s-0.258 2.026-0.768 2.964c-0.486 0.894-1.18 1.695-2.061 2.381-1.787 1.39-4.156 2.156-6.671 2.156-1.033 0-2.047-0.129-3.016-0.385-0.429 0.286-1.231 0.793-2.189 1.27-1.488 0.74-2.764 1.115-3.794 1.115zM9.5 3c-4.687 0-8.5 2.916-8.5 6.5 0 1.815 1.005 3.562 2.756 4.792 0.172 0.121 0.25 0.336 0.196 0.539-0.117 0.436-0.515 1.633-1.58 2.788 1.302-0.456 2.704-1.247 3.739-1.959 0.123-0.085 0.277-0.11 0.421-0.069 0.948 0.271 1.947 0.409 2.968 0.409 4.687 0 8.5-2.916 8.5-6.5s-3.813-6.5-8.5-6.5z"></path>
+            <title>Количество комментариев</title>
+          </svg>{{ post.comments_count }}&nbsp;
+        </span>
+        <span *ngIf="post.views_count" style="white-space:nowrap;">
+          <svg style="position:relative;top:-1px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 20 20">
+            <path fill="#000000" d="M19.872 10.166c-0.047-0.053-1.182-1.305-2.956-2.572-1.047-0.748-2.1-1.344-3.13-1.773-1.305-0.544-2.579-0.82-3.786-0.82s-2.481 0.276-3.786 0.82c-1.030 0.429-2.083 1.026-3.13 1.773-1.774 1.267-2.909 2.52-2.956 2.572-0.171 0.19-0.171 0.479 0 0.669 0.047 0.053 1.182 1.305 2.956 2.572 1.047 0.748 2.1 1.344 3.13 1.773 1.305 0.544 2.579 0.82 3.786 0.82s2.481-0.276 3.786-0.82c1.030-0.429 2.083-1.026 3.13-1.773 1.774-1.267 2.909-2.52 2.956-2.572 0.171-0.19 0.171-0.479 0-0.669zM12.574 6.438c0.907 0.763 1.426 1.873 1.426 3.062 0 2.206-1.794 4-4 4s-4-1.794-4-4c0-1.188 0.519-2.299 1.426-3.062 0.822-0.268 1.691-0.438 2.574-0.438s1.752 0.17 2.574 0.438zM16.317 12.606c-1.533 1.092-3.873 2.394-6.317 2.394s-4.784-1.302-6.317-2.394c-1.157-0.824-2.042-1.658-2.489-2.106 0.447-0.448 1.332-1.281 2.489-2.106 0.53-0.378 1.156-0.78 1.85-1.145-0.347 0.688-0.533 1.455-0.533 2.251 0 2.757 2.243 5 5 5s5-2.243 5-5c0-0.796-0.186-1.563-0.533-2.251 0.694 0.365 1.32 0.768 1.85 1.145 1.157 0.824 2.042 1.658 2.489 2.106-0.447 0.448-1.332 1.281-2.489 2.106z"></path>
+            <title>Количество просмотров</title>
+          </svg>{{ post.views_count }}
+        </span>
+      </li>
+    </ol>
+
+    <h6>Пользователи по количеству постов на главной:</h6>
+    <ol>
+      <li *ngFor="let user of summary.users">
+        <a [attr.href]="'https://d3.ru/user/' + user.key" target="_blank">{{ user.key }}</a> -
+        {{ user.count }}<span *ngIf="user.count > 1">🔥</span>
+      </li>
+    </ol>
+
+    <h6>Сообщества по количеству постов на главной:</h6>
+    <ol>
+      <li *ngFor="let domain of summary.domains">
+        <a *ngIf="domain.key !== ''" [attr.href]="'https://' + domain.key + '.d3.ru/'" target="_blank">{{ domain.key }}</a>
+        <a *ngIf="domain.key === ''" [attr.href]="'https://d3.ru/'" target="_blank">главная</a> -
+        {{ domain.count }}<span *ngIf="domain.count > 1">🔥</span>
+      </li>
+    </ol>
+  </div>
+</div>
