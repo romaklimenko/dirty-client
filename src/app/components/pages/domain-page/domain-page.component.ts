@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { VotersResponse } from 'src/app/models/voters-response';
 
-type Tab = 'domain' | 'readers' | 'elections';
+type Tab = 'domain' | 'elections';
 
 @Component({
   selector: 'app-domain-page',
@@ -18,7 +18,6 @@ export class DomainPageComponent implements OnInit {
 
   ready: boolean;
 
-  readers: any[];
   voters: VotersResponse;
 
   domain: any = null;
@@ -39,8 +38,6 @@ export class DomainPageComponent implements OnInit {
       this.prefix = paramMap.get('domain').toLowerCase();
 
       this.domain = await this.apiService.domain(this.prefix);
-      this.readers = await this.apiService.domainReaders(this.prefix);
-      // this.voters = await this.apiService.domainVotes(this.prefix);
 
       this.selectTab('domain');
 

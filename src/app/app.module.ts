@@ -26,8 +26,6 @@ import { KarmaComponent } from './components/charts/karma/karma.component';
 import { TopActivitiesListComponent } from './components/top-activities-list/top-activities-list.component';
 import { DomainsComponent } from './components/charts/domains/domains.component';
 import { LoversAndHatersComponent } from './components/charts/lovers-and-haters/lovers-and-haters.component';
-import { TopCardComponent } from './components/cards/top-card/top-card.component';
-import { TopPageComponent } from './components/pages/top-page/top-page.component';
 import { PostCardComponent } from './components/cards/post-card/post-card.component';
 import { PostPageComponent } from './components/pages/post-page/post-page.component';
 import { PostCommentsComponent } from './components/charts/post-comments/post-comments.component';
@@ -75,9 +73,7 @@ import { IndulgencesPageComponent } from './components/pages/indulgences-page/in
     KarmaComponent,
     TopActivitiesListComponent,
     DomainsComponent,
-    LoversAndHatersComponent,
-    TopCardComponent,
-    TopPageComponent,
+  LoversAndHatersComponent,
     PostCardComponent,
     PostPageComponent,
     PostCommentsComponent,

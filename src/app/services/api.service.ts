@@ -328,18 +328,6 @@ export class ApiService {
       `Пост https://d3.ru/${id}`,
       `https://d3.ru/api/posts/${id}/?cache=${Math.floor(new Date().getTime() / 1000.0)}`);
 
-    const tops = await this.fetchJson(
-      `Данные о пребыввнии поста https://d3.ru/${id} на главной`,
-      `${environment.apiUrl}/posts/${id}`,
-      {
-        method: 'GET',
-        headers: this.fingerprintHeaders
-      });
-
-    if (tops) {
-      post.tops = tops;
-    }
-
     this.setLocalCache(cacheKey, post, 1000 * 60);
     return post;
   }
@@ -397,34 +385,6 @@ export class ApiService {
         method: 'GET',
         headers: this.fingerprintHeaders
       });
-  }
-
-  async domainsReadersChange() {
-    const cacheKey = `domain_readers_change`;
-
-    let result = this.getLocalCache(cacheKey);
-
-    if (result) {
-      return result;
-    }
-
-    result = await this.fetchJson(
-      `Последние изменения в подписчиках сообществ`,
-      `${environment.apiUrl}/domains/readers`,
-      {
-        method: 'GET',
-        headers: this.fingerprintHeaders
-      });
-
-    this.setLocalCache(cacheKey, result, 1000 * 60 * 1);
-
-    return result;
-  }
-
-  async domainReaders(prefix: string) {
-    return await this.fetchJson(
-      `Подписчики сообщества https://${prefix}.d3.ru`,
-      `${environment.apiUrl}/domains/${prefix}/readers`);
   }
 
   async note(author: string) {

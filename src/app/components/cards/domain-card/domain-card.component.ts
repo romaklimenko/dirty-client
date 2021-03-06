@@ -35,19 +35,6 @@ export class DomainCardComponent implements OnInit {
           }
         }
       });
-
-    this.apiService.domainsReadersChange()
-      .then(response => {
-        const now = Math.floor(new Date().getTime() / 1000.0);
-        this.domains = response.map(d => {
-          const days = Math.ceil((now - d.epoch_from) / 86400);
-          d.days_change = `${days} ${declension(days, ['день', 'дня', 'дней'])}`;
-          d.subscribers_per_day = Math.round(d['readers_count_change'] * 100 / ((now - d['epoch_from']) / 86400)) / 100;
-          return d;
-        });
-
-        this.domains.sort((a, b) =>  a['subscribers_per_day'] < b['subscribers_per_day'] ? 1 : -1);
-      });
   }
 
   submit() {

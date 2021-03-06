@@ -44,16 +44,13 @@ export class AppComponent {
       case 'KeyH': // Home
         this.router.navigateByUrl('/');
         break;
-      case 'KeyI': // Home
+      case 'KeyI': // I
         if (!this.apiService.anonymous) {
           this.router.navigateByUrl(`/user/${this.apiService.session.user.login}`);
         }
         break;
       case 'KeyN': // Notes
         this.router.navigateByUrl('/notes');
-        break;
-      case 'KeyT': // Top
-        this.router.navigateByUrl('/top');
         break;
       default:
         break;

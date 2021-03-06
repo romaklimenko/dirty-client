@@ -7,7 +7,6 @@ import { DomainPageComponent } from './components/pages/domain-page/domain-page.
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { UserPageComponent } from './components/pages/user-page/user-page.component';
 import { UsersPageComponent } from './components/pages/users-page/users-page.component';
-import { TopPageComponent } from './components/pages/top-page/top-page.component';
 import { PostPageComponent } from './components/pages/post-page/post-page.component';
 import { SockpuppetsPageComponent } from './components/pages/sockpuppets-page/sockpuppets-page.component';
 import { IndulgencesPageComponent } from './components/pages/indulgences-page/indulgences-page.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
     [
       { path: '', component: HomePageComponent },
       { path: 'notes', component: NotesPageComponent },
-      { path: 'top', component: TopPageComponent },
       { path: 'socks', component: SockpuppetsPageComponent },
       { path: 'amen', component: IndulgencesPageComponent },
       { path: 'domain/:domain', component: DomainPageComponent },

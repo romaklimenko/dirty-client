@@ -15,11 +15,6 @@
         </a>
       </li>
       <li class="nav-item">
-        <a [routerLink]="" class="nav-link" [ngClass]="currentTab === 'readers' ? 'active' : ''" (click)="selectTab('readers')">
-          Подписчики
-        </a>
-      </li>
-      <li class="nav-item">
         <a [routerLink]="" class="nav-link" [ngClass]="currentTab === 'elections' ? 'active' : ''" (click)="selectTab('elections')">
           Выборы
         </a>
@@ -33,9 +28,6 @@
   <br>
   <app-domain-voters *ngIf="ready && voters" [voters]="this.voters" [width]="width()"></app-domain-voters>
   <br>
-</div>
-<div [hidden]="currentTab !== 'readers' || !ready">
-  <app-readers *ngIf="ready && readers !== null" [readers]="readers" [width]="width()"></app-readers>
 </div>
 <div [hidden]="currentTab !== 'elections' || !ready">
   <app-domain-elections *ngIf="ready" [prefix]="prefix" [width]="width()"></app-domain-elections>
